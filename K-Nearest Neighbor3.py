@@ -8,7 +8,6 @@ fish_weight = [242.0, 290.0, 340.0, 363.0, 430.0, 450.0, 500.0, 390.0, 450.0, 50
                 700.0, 725.0, 720.0, 714.0, 850.0, 1000.0, 920.0, 955.0, 925.0, 975.0, 950.0, 6.7, 
                 7.5, 7.0, 9.7, 9.8, 8.7, 10.0, 9.9, 9.8, 12.2, 13.4, 12.2, 19.7, 19.9]
 import numpy as np
-from numpy.core.fromnumeric import shape
 np.column_stack(([1,2,3], [4,5,6,]))
 fish_data = np.column_stack((fish_length, fish_weight))
 print(fish_data[:5])
@@ -48,6 +47,7 @@ plt.scatter(25,150, marker='^')
 plt.scatter(train_input[indexes,0], train_input[indexes,1], marker='D')
 plt.xlabel('length')
 plt.ylabel('weight')
+plt.show()
 # 두 특성의 값이 놓인 범위가 다르다 이를 두 특성의 스케일이 다르다고 말한다
 # 알고리즘이 거리기반일때 샘플간의 거리에 영향을 많이 받는데 제대로 사용하려면 특성값을 일정한 기준으로 맞춰주어야 하는데 이를 전처리 라고한다
 
@@ -65,4 +65,40 @@ plt.xlim((0, 1000))
 plt.xlabel('length')
 plt.ylabel('weight')
 plt.show()
+# %%
+# 가장 널리 사용하는 전처리 방법 중 하나는 표준점수 
+# 각 특성값이 0에서 표준편차의 몇 배만큼 떨어져 있는지를 나타낸다.
+# np.mean() 함수는 평균을 계산 np,std()는 표준편차를 계산
+mean = np.mean(train_input, axis=0)
+std = np.std(train_input, axis=0)
+print(mean, std)
+# %%
+train_scaled = (train_input - mean ) / std
+#train_input의 모든행에 mean에 있는 두 평균값을 빼주고 std에 있는 모든 표준편차를 다시 모든행에 적용 = 이런 numpy기능을 브로드캐스팅
+plt.scatter(train_scaled[: , 0], train_scaled[ : , 1])
+plt.scatter( 25, 150, marker='^')
+plt.xlabel('length')
+plt.ylabel('weight')
+plt.show()
+# %%
+new = ([25, 150] - mean ) / std
+plt.scatter(train_scaled [ : , 0], train_scaled[: , 1])
+plt.scatter(new[0], new[1], marker='^')
+plt.xlabel('length')
+plt.ylabel('weight')
+plt.show()
+# %%
+kn.fit(train_scaled, train_target) # K-Nearest Neighbor 다시 훈련
+test_scaled = (test_input -mean) / std
+kn.score(test_scaled, test_target) #학습시킨 학습모델 점수
+# %%
+print(kn.predict(([new])))
+# %%
+distances, indexes = kn.kneighbors([new])
+plt.scatter(train_scaled[ : , 0], train_scaled[ : , 1])
+plt.scatter(new[0], new[1], marker='^')
+plt.scatter(train_scaled[indexes, 0 ], train_scaled[indexes,1], marker='D')
+plt.xlabel('length')
+plt.ylabel('weight')
+plt.show() #학습된 모델을 통해 도미로 판별
 # %%

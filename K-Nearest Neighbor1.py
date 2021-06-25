@@ -55,5 +55,4 @@ kn49.score(fish_data, fish_target)
 
 print(35/49)
 
-
 # %%
