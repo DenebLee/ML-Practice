@@ -48,8 +48,7 @@ print(sc.score(test_scaled, test_target))
 sc.partial_fit(train_scaled, train_target)
 print(sc.score(train_scaled, train_target))
 print(sc.score(test_scaled, test_target))
-#에포크를 한번더 실행하니 정확도가 향상
-# %%
+#에포크를 한번더 실행하니 정확도가 향상 # %%
 # 훈련세트 점수는 에포크가 진행될수록 꾸준히 증가하지만 테스트 세트 점수는 어느 순간 감소하기 시작
 # 바로 이 지점이 해당 모델의 과대적합되기 시작하는곳
 # 과대적합이 시작하기 전에 훈련을 멈추는 것을 조기 종료

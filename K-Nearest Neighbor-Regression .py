@@ -75,9 +75,9 @@ lr.fit(train_input, train_target)
 print(lr.predict([[50]])) 
 # %%
 print(lr.coef_, lr.intercept_)
-#coef_와 intercept는 머신러닝 알고리즘이 찾은 값이라는 의미로 모델 파라미터라고 부른다
+# coef_와 intercept는 머신러닝 알고리즘이 찾은 값이라는 의미로 모델 파라미터라고 부른다
 # 머신러닝 알고리즘의 훈련과정은 최적의 모델 파라미터를 찾는것과 같다 이를 모델 기반 학습
-#머신러닝에서 기울기를 종종 계수 혹은 가중치라고 부른다
+# 머신러닝에서 기울기를 종종 계수 혹은 가중치라고 부른다
 # %%
 #훈련세트의 산점도 
 plt.scatter(train_input, train_target)

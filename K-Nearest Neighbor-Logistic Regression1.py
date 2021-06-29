@@ -3,6 +3,7 @@
 from numpy.random import logistic
 import pandas as pd 
 fish = pd.read_csv('https://bit.ly/fish_csv_data')
+# pandas로 해당url의 데이터 csv형식으로 가져오기
 fish.head()
 # %%
 print(pd.unique(fish['Species']))
@@ -126,7 +127,6 @@ from scipy.special import softmax
 proba = softmax(decision, axis=1)
 print(np.round(proba, decimals=3))
 
-# %%
 # k-최근접 이웃 모델이 확률을 출력할 수 있지만 이웃한 샘플의 클래스 비율이므로 항상 정해진 확률만 출력 
 # 로지스틱 회귀는 이진 분류에서는 하나의 선형 방정식을 훈련
 # 다중 분류일 경우에는 클래스 개수만큼 방정식을 훈련
